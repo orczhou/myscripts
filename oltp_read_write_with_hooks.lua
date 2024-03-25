@@ -1,4 +1,3 @@
-#!/usr/bin/env sysbench
 -- Copyright (C) 2006-2017 Alexey Kopytov <akopytov@gmail.com>
 
 -- This program is free software; you can redistribute it and/or modify
@@ -24,7 +23,6 @@ require("oltp_common")
 function sysbench.hooks.sql_error_ignorable(err)
   if err.sql_errno == 1062 then -- ER_DUP_ENTRY
     -- do nothing
-    -- con:reconnect()
     return true
   end
 end
@@ -70,6 +68,4 @@ function event()
    if not sysbench.opt.skip_trx then
       commit()
    end
-
-   check_reconnect()
 end
